@@ -15,6 +15,10 @@ const port = process.env.PORT || 8080;
 // включаем сервер
 app.use(express.static(path.join(__dirname, "dist")));
 
+// на все запосы get отвечаем содержимым index.html
+// при обращении к несуществующим файлам - index.html
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist/index.html")));
+
 // запускаем сервер
 app.listen(port, (err) =>{
     if (err) return console.error(err);
